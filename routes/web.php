@@ -32,6 +32,7 @@ Route::prefix('personal')->name('personal.')->group(function () {
     Route::get('/resume',[PersonalController::class,'resume'])->name('resume');
     Route::get('/projects',[PersonalController::class,'projects'])->name('projects');
     Route::get('/contact',[PersonalController::class,'contact'])->name('contact');
+    Route::post('/contact',[PersonalController::class,'contact_email']);
 
 });
 Route::get('form1',[FormController::class,'form1'])->name('form1');

@@ -18,6 +18,8 @@ class FormController extends Controller
         //     'required'=>'الحقل مطلوب',
 
         // ]);
-        dd($request->all());
+        $name = $request->name;
+       $path= $request->file('image')->store('photos','costum');
+        return view('form.form1_data',compact('name','path'));
     }
 }

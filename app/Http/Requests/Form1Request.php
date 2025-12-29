@@ -23,7 +23,10 @@ class Form1Request extends FormRequest
     {
         return [
             'name'=>'required|max:155',
-            'email'=>'required|email|ends_with:@gmail.com',
+            'email'=>'required|email',
+            'password'=>'required',
+            'confirm_password'=>'required|same:password',
+            'image'=>'required|image|mimes:png,jpg',
         ];
     }
         public function messages()
