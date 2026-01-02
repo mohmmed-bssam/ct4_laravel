@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\calcController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CreativeController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\PersonalController;
@@ -35,6 +37,14 @@ Route::prefix('personal')->name('personal.')->group(function () {
     Route::post('/contact',[PersonalController::class,'contact_email']);
 
 });
+Route::prefix('creative')->name('creative.')->group(function () {
+    Route::get('/',[CreativeController::class,'index'])->name('index');
+    Route::get('/about',[CreativeController::class,'about'])->name('about');
+    Route::get('/service',[CreativeController::class,'service'])->name('service');
+    Route::get('/portfolio',[CreativeController::class,'portfolio'])->name('portfolio');
+    Route::get('/contact',[CreativeController::class,'contact'])->name('contact');
+    Route::post('/contact',[CreativeController::class,'contact_email']);
+});
 Route::get('form1',[FormController::class,'form1'])->name('form1');
 Route::post('form1',[FormController::class,'form_data']);
-require __DIR__ . '/admin.php';
+Route::resource('courses', CourseController::class);
