@@ -46,7 +46,7 @@ return [
             'throw' => false,
             'report' => false,
         ],
-        'costum' => [
+        'custom' => [
             'driver' => 'local',
             'root' => public_path(),
             'url' => env('APP_URL').'/',

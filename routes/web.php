@@ -5,8 +5,10 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CreativeController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\FreelancerController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\RelationController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -27,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 // Route::resource('posts',PostsController::class);
 
 // Route::get('sum/{a}/{b}',[calcController::class,'sum'])->name('sum');
-Route::get('users',[UserController::class,'index'])->name('users.index');
+// Route::get('users',[UserController::class,'index'])->name('users.index');
 Route::get('freelancer', [FreelancerController::class, 'index'])->name('freelancer.index');
 Route::prefix('personal')->name('personal.')->group(function () {
     Route::get('/',[PersonalController::class,'index'])->name('index');
@@ -47,4 +49,19 @@ Route::prefix('creative')->name('creative.')->group(function () {
 });
 Route::get('form1',[FormController::class,'form1'])->name('form1');
 Route::post('form1',[FormController::class,'form_data']);
+
+Route::get('/courses/trash', [CourseController::class, 'trash'])->name('courses.trash');
+Route::get('/courses/{course}/restore', [CourseController::class, 'restore'])->name( 'courses.restore')->withTrashed();
+Route::delete('/courses/{course}/delete', [CourseController::class, 'delete'])->name( 'courses.delete')->withTrashed();
 Route::resource('courses', CourseController::class);
+Route::get('/courses/search', [CourseController::class, 'search'])->name('courses.search');
+Route::post('/courses/comments', [CourseController::class, 'comments'])->name('courses.comments');
+
+Route::resource('courses.lessons', LessonController::class);
+//
+Route::get('users', [UserController::class, 'index'])->name('users.index');
+Route::prefix('relations')->group(function () {
+
+    Route::get('users', [RelationController::class, 'users']);
+    Route::get('passport/{passport}', [RelationController::class, 'passport']);
+});
